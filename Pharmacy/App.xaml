@@ -1,0 +1,57 @@
+﻿<Application x:Class="Pharmacy.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Pharmacy"
+             xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+             xmlns:view="clr-namespace:Pharmacy.Views"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Cyan.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Amber.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type vm:CategoriesViewModel}">
+                <view:CategoriesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CategoryViewModel}">
+                <view:CategoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MedItemViewModel}">
+                <view:MedItemView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SearchViewModel}">
+                <view:SearchView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CategoryOptionsViewModel}">
+                <view:CategoryAddView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MedItemOptionsViewModel}">
+                <view:MedItemAddView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ExpiryMedItemsViewModel}">
+                <view:ExpiryItemsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SmallAmmountViewModel}">
+                <view:SmallAmmountView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ChangeAmmountViewModel}">
+                <view:ChangeAmmountView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UsersViewModel}">
+                <view:UsersView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UserViewModel}">
+                <view:UserView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UserOptionsViewModel}">
+                <view:UserAddView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UserPillsOptionsViewModel}">
+                <view:UsersPillsAddView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

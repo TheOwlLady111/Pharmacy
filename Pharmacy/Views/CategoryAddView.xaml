@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Pharmacy.Views.CategoryAddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Pharmacy.Views"
+             xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="332"
+    d:DataContext="d:DesignInstance Type=ViewModel:CategoryOptionsViewModel">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+
+        <TextBlock HorizontalAlignment="Center"
+                       
+                       Visibility="{Binding isEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       FontSize="20"
+                       Foreground="{StaticResource PrimaryHueDarkBrush}"
+                       FontFamily="Times New Roman"
+                       FontWeight="DemiBold"
+                       Text="Редактирование категории" Margin="10,32,8,434.6"/>
+        <TextBlock HorizontalAlignment="Center"
+                      
+                       Visibility="{Binding isAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       FontSize="20"
+                       Foreground="{StaticResource PrimaryHueDarkBrush}"
+                       FontFamily="Times New Roman"
+                       FontWeight="DemiBold"
+                       Text="Добавление категории" Margin="23,32,22,434.6"/>
+        <TextBox 
+             materialDesign:HintAssist.Hint="Введите имя категории"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Margin="0,172,0,280.6" >
+            <TextBox.Text>
+            <Binding Path="Text" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                <Binding.ValidationRules>
+                    <DataErrorValidationRule />
+                </Binding.ValidationRules>
+            </Binding>
+            </TextBox.Text>
+
+        </TextBox>
+
+
+        <Button
+            Margin="141,342,135,91.6"
+            Command="{Binding Add}"
+            IsEnabled="{Binding Path=IsValid}"
+            Visibility="{Binding isAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
+  Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+  ToolTip="MaterialDesignFloatingActionDarkButton"
+  >
+            <materialDesign:PackIcon
+    Kind="Check" />
+        </Button>
+
+        <Button
+            Margin="207,342,69,91.6"
+            Command="{Binding Edit}"
+            IsEnabled="{Binding Path=IsValid}"
+            Visibility="{Binding isEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
+  Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+  ToolTip="MaterialDesignFloatingActionDarkButton"
+  >
+            <materialDesign:PackIcon
+    Kind="Check" />
+        </Button>
+    </Grid>
+</UserControl>

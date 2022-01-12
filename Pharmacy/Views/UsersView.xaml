@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="Pharmacy.Views.UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pharmacy.Views"
+              xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="830">
+    <UserControl.DataContext>
+        <vm:UsersViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3.5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Height="400" VerticalAlignment="Top">
+            <ListBox x:Name="cats" ItemsSource="{Binding Users, Mode=TwoWay}"
+                 SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                 Background="Transparent"
+                 Height="400"
+                 HorizontalContentAlignment="Stretch"
+                 BorderThickness="0"
+                 SelectionMode="Single"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 ScrollViewer.CanContentScroll="True" Margin="0,0,-0.4,0" SelectionChanged="ListBox_SelectionChanged">
+
+
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+                        <Border x:Name="brd"  CornerRadius="5" Height="50" Background="{StaticResource PrimaryHueDarkBrush}">
+                            
+
+                            <DockPanel>
+
+                                <TextBlock FontSize="16" FontWeight="DemiBold" Margin="5 0 0 0" VerticalAlignment="Center" Text="{Binding Name}" Foreground="AliceBlue"/>
+                                <TextBlock FontSize="14" FontWeight="Heavy" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0 0 5 0" Foreground="AliceBlue"/>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
+        </StackPanel>
+
+        <Grid Grid.Column="0">
+            <Button x:Name="Delete" Command="{Binding DeleteUser}"
+                Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                ToolTip="Удалить пользователя из списка" Margin="31,416,194.6,24"
+                IsEnabled="False"
+                Height="40" Width="40">
+
+                <materialDesign:PackIcon
+                Kind="Delete" Height="16" Width="16" />
+
+            </Button>
+
+            <Button x:Name="Add" Command="{Binding AddUser}"
+                Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                ToolTip="Добавить пользователя" Margin="113,416,112.6,24"
+                
+                Height="40" Width="40" RenderTransformOrigin="0.08,-1">
+
+                <materialDesign:PackIcon
+                Kind="Plus" Height="16" Width="16" />
+
+            </Button>
+
+            <Button x:Name="Edit" Command="{Binding EditUser}"
+                Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                ToolTip="Редактировать пользователя из списка" Margin="195,416,30.6,24"
+                IsEnabled="False"
+                Height="40" Width="40" RenderTransformOrigin="0.08,-1">
+
+                <materialDesign:PackIcon
+                Kind="LeadPencil" Height="16" Width="16" />
+
+            </Button>
+        </Grid>
+        <Grid Grid.Column="1" Grid.ColumnSpan="2">
+            <ContentControl Content="{Binding CurrentVM}">
+            </ContentControl>
+        </Grid>
+
+
+
+    </Grid>
+</UserControl>

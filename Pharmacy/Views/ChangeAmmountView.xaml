@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Pharmacy.Views.ChangeAmmountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pharmacy.Views"
+             xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="430" d:DesignWidth="415"
+              d:DataContext="d:DesignInstance Type=ViewModel:ChangeAmmountViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <TextBox 
+             materialDesign:HintAssist.Hint="Введите количество: "
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Margin="0,117,-0.8,205.8"  >
+                <TextBox.Text>
+                    <Binding Path="Ammount" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+            </TextBox>
+            <Button
+            Margin="170,275,189.2,49.8"
+            Command="{Binding SaveAmmount}"
+            IsEnabled="{Binding Path=IsValid}"
+  Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+  ToolTip="Сохранить изменения"
+  >
+                <materialDesign:PackIcon
+    Kind="Check" Height="23" Width="23" />
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="0">
+            <TextBlock Text="Изменение количества"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="28"
+                       FontWeight="DemiBold"
+                       FontFamily="Times New Roman"
+                       Foreground="{DynamicResource PrimaryHueDarkBrush}"/>
+        </Grid>
+    </Grid>
+</UserControl>

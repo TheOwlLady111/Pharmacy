@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="Pharmacy.Views.CategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pharmacy.Views"
+             xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="564.4"
+             d:DataContext="d:DesignInstance Type=ViewModel:CategoryViewModel"
+            >
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3.5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <StackPanel Margin="0,0,-0.2,104.6"> 
+                <ListBox x:Name="items" ItemsSource="{Binding Items, Mode=TwoWay}"
+                         
+                 SelectedItem="{Binding SelectedMedItem, Mode=TwoWay}"
+                 Background="Transparent"
+                 Height="400"
+                 HorizontalContentAlignment="Stretch"
+                 BorderThickness="0"
+                 SelectionMode="Single"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.CanContentScroll="True" SelectionChanged="items_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border x:Name="brd" Background="{StaticResource SecondaryHueMidBrush}" CornerRadius="5" Height="30">
+                                <DockPanel>
+                                    <Border Width="18" Height="18" Background="{StaticResource PrimaryHueLightBrush}"  CornerRadius="90">
+                                        <materialDesign:PackIcon  Kind="Pill" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="AliceBlue"/>
+                                    </Border>
+                                    <TextBlock FontSize="14" FontWeight="DemiBold" Margin="5 0 0 0" VerticalAlignment="Center" Text="{Binding NameMedItem}" Foreground="AliceBlue"/>
+                                    <TextBlock FontSize="14" FontWeight="Heavy" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0" Foreground="AliceBlue">
+                                    </TextBlock>
+                                </DockPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="0">
+            <Button x:Name="Delete1" Command="{Binding DeleteMedItem}"
+                    Height="40" Width="40"
+                Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                ToolTip="Удалить медикамент из категории" Margin="10,393,150,0"
+                IsEnabled="False">
+
+                <materialDesign:PackIcon
+                     Kind="Delete" Height="16" Width="16" />
+
+            </Button>
+
+            <Button x:Name="Add1" 
+                    Height="40" Width="40"
+                Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                ToolTip="Добавить медикамент в категорию" Margin="96,421,96.8,28.6"
+                IsEnabled="True" Click="Add1_Click">
+
+                <materialDesign:PackIcon
+                     Kind="Plus" Height="16" Width="16" />
+
+            </Button>
+
+            <Button x:Name="Edit1" Command="{Binding EditItem}"
+                    Height="40" Width="40"
+                Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                ToolTip="Редактировать медикамент из категории" Margin="162,421,30.8,28.6"
+                IsEnabled="False">
+
+                <materialDesign:PackIcon
+                     Kind="LeadPencil" Height="16" Width="16" />
+
+            </Button>
+
+            <Button x:Name="addMed" Height="30" Width="30" Command="{Binding AddMedicament}"
+  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+  HorizontalAlignment="Left"
+                    Visibility="Hidden"
+  ToolTip="Добавить медикамент"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="74,386,0,73.6">
+                <materialDesign:PackIcon
+    Kind="Pill"
+    />
+            </Button>
+
+            <Button x:Name="addIns" Height="30" Width="30" Command="{Binding AddInstrument}"
+  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Visibility="Hidden"
+  HorizontalAlignment="Left"
+  ToolTip="Добавить инструмент"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="128,386,0,73.6">
+                <materialDesign:PackIcon
+    Kind="BriefcasePlus"
+    />
+            </Button>
+        </Grid>
+            
+                <Grid Grid.Column="1">
+            <ContentControl Content="{Binding CurrentVM}">
+            </ContentControl>
+        </Grid>
+
+    </Grid>
+</UserControl>

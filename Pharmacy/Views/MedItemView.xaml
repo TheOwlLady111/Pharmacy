@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Pharmacy.Views.MedItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pharmacy.Views"
+              xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="332"
+            d:DataContext="d:DesignInstance Type=ViewModel:MedItemViewModel">
+
+    <Grid>
+        <!--<Border>
+            <StackPanel>
+                <TextBlock Text="{Binding NameMedItem}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" FontWeight="ExtraBold" TextDecorations="Underline"/>
+                <TextBlock Text="Произведено: " FontSize="16" Margin="20,20,0,0" FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" HorizontalAlignment="Left" Width="97"/>
+                <TextBlock Text="Произведено: " FontSize="16"  HorizontalAlignment="Right" Margin="0,0,-5,0" FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27"/>
+            </StackPanel>
+        </Border>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid Grid.Row="0">
+            <Border x:Name="brd"  CornerRadius="10" Height="50" Width="292">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="{DynamicResource Accent400}" Offset="0.0"/>
+                        <GradientStop Color="{DynamicResource Primary200}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <TextBlock Text="{Binding NameMedItem}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" FontWeight="ExtraBold" TextDecorations="Underline"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Margin="10,54,0,-0.4" Grid.RowSpan="2">
+            <StackPanel Margin="0,-55,158,44" >
+                <TextBlock Text="Произведено: " FontSize="16" Margin="20,60,0,20" FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" HorizontalAlignment="Left" Width="97" FontWeight="Bold"/>
+                <TextBlock Text="Срок годности: " FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27" FontWeight="Bold" />
+                <TextBlock Text="Производитель: " FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27" FontWeight="Bold"/>
+                <TextBlock Text="Назначение: " FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27" FontWeight="Bold"/>
+                <TextBlock Text="Количество: " FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27" FontWeight="Bold"/>
+                <TextBlock Text="Доза: " FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27" FontWeight="Bold"/>
+                <TextBlock Text="Тип: " FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27" FontWeight="Bold"/>
+                <TextBlock Text="Дополнительно: " FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource PrimaryHueDarkBrush}" RenderTransformOrigin="0.494,-1.516" Height="27" FontWeight="Bold"/>
+            </StackPanel>
+
+            <Grid Margin="164,0,0,0">
+                <StackPanel Margin="-30,-53,0.4,0" >
+                    <TextBlock Text="{Binding Path=ReleaseDate}" FontSize="16" Margin="20,60,0,20" FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" HorizontalAlignment="Left" Width="97"/>
+                    <TextBlock Text="{Binding Path=ExpiryDate}" FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" RenderTransformOrigin="0.494,-1.516" Height="27"/>
+                    <TextBlock Text="{Binding Path=Manufacture}" FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" RenderTransformOrigin="0.494,-1.516" Height="27"/>
+                    <TextBlock Text="{Binding Path=WhatFor}" FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" RenderTransformOrigin="0.494,-1.516" Height="27"/>
+                    <TextBlock Text="{Binding Path=Ammount}" FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" RenderTransformOrigin="0.494,-1.516" Height="27"/>
+                    <TextBlock Text="{Binding Path=Doze}" FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" RenderTransformOrigin="0.494,-1.516" Height="27"/>
+                    <TextBlock Text="{Binding Path=Type}" FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" RenderTransformOrigin="0.494,-1.516" Height="27"/>
+                    <TextBlock  FontSize="16" Margin="20,0,0,10" HorizontalAlignment="Left"  FontFamily="Times New Roman" Foreground="{StaticResource MaterialDesignBody}" RenderTransformOrigin="0.494,-1.516" Height="27">
+                        <Hyperlink NavigateUri="{Binding Path=Link}" RequestNavigate="Hyperlink_RequestNavigate">
+                            Click here
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+            </Grid>
+        </Grid>
+</UserControl>

@@ -1,0 +1,213 @@
+﻿<Window x:Class="Pharmacy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Pharmacy"
+        xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+        mc:Ignorable="d"
+         Title="MainWindow" Height="550" Width="900"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+
+    <materialDesign:Card MouseDown="Card_MouseDown" Background="{DynamicResource MaterialDesignPaper}" >
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+
+                    <Border x:Name="brd" VerticalAlignment="Top" Margin="10,20,353.4,0"  CornerRadius="10" Height="100"  >
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                <GradientStop Color="{DynamicResource Primary400}" Offset="0.0"/>
+                                <GradientStop Color="{DynamicResource Primary800}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <DockPanel>
+
+                            <TextBlock FontSize="16" FontWeight="DemiBold" Margin="5 0 0 0" VerticalAlignment="Center"   Foreground="AliceBlue" FontStyle="Italic">
+                                Создайте свою домашнюю аптечку!!!
+                                <LineBreak/>
+                                Создавайте и редактируйте категории, добавляйте в них 
+                                <LineBreak/>
+                                препараты и редактируйте их.
+                            </TextBlock>
+                            <TextBlock FontSize="14" FontWeight="Heavy" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0 0 5 0" Foreground="AliceBlue"/>
+                        </DockPanel>
+                    </Border>
+
+                    <Border x:Name="brd1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-50,0,0"  CornerRadius="10" Height="100" >
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                <GradientStop Color="{DynamicResource Primary800}" Offset="0.0"/>
+                                <GradientStop Color="{DynamicResource Primary600}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <DockPanel>
+
+                            <TextBlock FontSize="16" FontWeight="DemiBold" Margin="5 0 0 0" VerticalAlignment="Center"   Foreground="AliceBlue" FontStyle="Italic">
+                                В приложении вы можете просмотреть список просроченных
+                                <LineBreak/>
+                                лекарств в Вашей аптечке и список медикаментов,
+                                <LineBreak/>
+                                которые нужно пополнить.
+                            </TextBlock>
+                            <TextBlock FontSize="14" FontWeight="Heavy" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0 0 5 0" Foreground="AliceBlue"/>
+                        </DockPanel>
+                    </Border>
+
+                    <Border x:Name="brd2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,70"  CornerRadius="10" Height="100">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                <GradientStop Color="{DynamicResource Primary300}" Offset="0.0"/>
+                                <GradientStop Color="{DynamicResource Primary900}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <DockPanel>
+
+                            <TextBlock FontSize="16" FontWeight="DemiBold" Margin="5 0 0 0" VerticalAlignment="Center"   Foreground="AliceBlue" FontStyle="Italic">
+                               Если кто-то в Вашей семье принимает какие-либо
+                                <LineBreak/>
+                                таблетки постоянно, то сообщите об этом приложению,
+                                <LineBreak/>
+                                и оно автоматически будет вычитать их.
+                            </TextBlock>
+                            <TextBlock FontSize="14" FontWeight="Heavy" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0 0 5 0" Foreground="AliceBlue"/>
+                        </DockPanel>
+                    </Border>
+                    <ContentControl
+                           Content="{Binding ThisView}" Margin="0,0,0.4,0.2">
+                    </ContentControl>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="0">
+                <Border Background="{StaticResource SecondaryHueMidBrush}"/>
+                <Button x:Name="exit"
+  Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+  ToolTip="Выход из приложения"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Margin="850,10,10,3.2" Height="42" Click="exit_Click">
+                    <materialDesign:PackIcon
+    Kind="ExitToApp"/>
+
+                </Button>
+
+                <TextBlock Text="Домашняя аптечка" Margin="20 0 0 0 "
+                    Foreground="{StaticResource PrimaryHueDarkBrush}"
+                           FontSize="40"
+                           FontWeight="ExtraBlack"
+                           FontFamily="Times New Roman"
+                           HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                    <ToggleButton
+  Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+  ToolTip="MaterialDesignSwitchDarkToggleButton"
+  IsChecked="True" Margin="588,10,-148,-9.8" Click="ToggleButton_Click" />
+            </Grid>
+
+            <Grid Grid.Row="1" HorizontalAlignment="Left" Width="70" Grid.Column="0"  Background="{StaticResource SecondaryHueMidBrush}" >
+                <StackPanel Grid.Row="1" Grid.Column="0" Width="70">
+                    <Button
+                        
+                        Command="{Binding CategoriesViewCommand}"
+                        Margin="0 10 0 0"
+                         Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                         ToolTip="Просмотр и редактирование каталога"
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Button_Click">
+                        <materialDesign:PackIcon
+                        Kind="FormatListNumbered" Height="33" Width="35">
+                        </materialDesign:PackIcon>
+
+                    </Button>
+
+                    <Button
+                        
+                        Command="{Binding SearchViewCommand}"
+                        Margin="0 10 0 10"
+                         Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                         ToolTip="Поиск элемента"
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Button_Click_1">
+                        <materialDesign:PackIcon
+                        Kind="TabSearch" Height="33" Width="35">
+                        </materialDesign:PackIcon>
+
+                    </Button>
+
+                    <materialDesign:Badged
+                                             Badge="{Binding CountExpiry}" Margin="10 0 0 0">
+                        <Button
+                        
+                        Command="{Binding ExpiryViewCommand}"
+                        Margin="0 0 0 10"
+                         Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                         ToolTip="Просмотр просроченных элементов"
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="54" Height="54" Click="Button_Click_2">
+                            <materialDesign:PackIcon
+                        Kind="SortCalendarAscending" Height="33" Width="35">
+                            </materialDesign:PackIcon>
+
+                        </Button>
+                    </materialDesign:Badged>
+
+                    <materialDesign:Badged
+                                             Badge="{Binding CountSmall}" Margin="10 0 0 0">
+                        <Button
+                        
+                        Command="{Binding SmallAmmountViewCommand}"
+                        Margin="0 0 0 0"
+                         Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                         ToolTip="Просмотр элементов в малом количестве"
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Button_Click_3">
+                            <materialDesign:PackIcon
+                        Kind="BasketPlusOutline" Height="33" Width="35">
+                            </materialDesign:PackIcon>
+
+                        </Button>
+                    </materialDesign:Badged>
+
+                    <Button
+                        
+                        Command="{Binding UsersViewCommand}"
+                        Margin="0 10 0 10"
+                         Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                         ToolTip="Добавление пользователя"
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Button_Click_4">
+                        <materialDesign:PackIcon
+                        Kind="AccountMultiplePlus" Height="33" Width="35">
+                        </materialDesign:PackIcon>
+
+                    </Button>
+                    
+
+                </StackPanel>
+            </Grid>
+
+
+        </Grid>
+
+    </materialDesign:Card>
+</Window>
+

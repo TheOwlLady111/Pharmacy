@@ -1,0 +1,243 @@
+﻿<UserControl x:Class="Pharmacy.Views.MedItemAddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Pharmacy.Views"
+             xmlns:local1="clr-namespace:Pharmacy"
+             xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="332"
+              d:DataContext="d:DesignInstance Type=ViewModel:MedItemOptionsViewModel">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding isEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       FontSize="20"
+                       Foreground="{StaticResource PrimaryHueDarkBrush}"
+                       FontFamily="Times New Roman"
+                       FontWeight="DemiBold"
+                       Text="Редактирование элемента аптечки"/>
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding isAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       FontSize="20"
+                       Foreground="{StaticResource PrimaryHueDarkBrush}"
+                       FontFamily="Times New Roman"
+                       FontWeight="DemiBold"
+                       Text="Добавление элемента в аптечку"/>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="56*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="what"
+                    
+    Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="От/для чего"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" Margin="0,160,0,0" Grid.ColumnSpan="3" >
+                <TextBox.Text>
+                    <Binding Path="WhatFor" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+            <DatePicker Name="release"
+                        
+  materialDesign:HintAssist.Hint="Дата выпуска"
+  Style="{StaticResource MaterialDesignFilledDatePicker}" Margin="62,51,10,344" RenderTransformOrigin="0.507,0.494" Grid.Column="2" >
+                <DatePicker.SelectedDate>
+                    <Binding Path="ReleaseDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
+
+            <DatePicker Name="expiry"
+                        
+  materialDesign:HintAssist.Hint="Срок годности"
+  Style="{StaticResource MaterialDesignFilledDatePicker}" Margin="0,51,180,344" RenderTransformOrigin="0.507,0.494" Grid.ColumnSpan="3" >
+                <DatePicker.SelectedDate>
+                    <Binding Path="ExpiryDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
+
+            <TextBox x:Name="ammount"
+                      
+    Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="Количество"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" Margin="0,210,0,0" Grid.ColumnSpan="3">
+                <TextBox.Text>
+                    <Binding Path="Ammount" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="name"
+                      
+    Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="Название"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" Margin="0,9,0,0" Grid.ColumnSpan="3" >
+                <TextBox.Text>
+                    <Binding Path="NameMedItem" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="link"
+                      
+    Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="Ссылка(может быть пустым)"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" Margin="0,260,0,0" Grid.ColumnSpan="3" >
+                <TextBox.Text>
+                    <Binding Path="Link" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+
+            <TextBox x:Name="manuf"
+                     
+    Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="Производитель"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" Margin="0,110,0,0" Grid.ColumnSpan="3" >
+                <TextBox.Text>
+                    <Binding Path="Manufacture" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+            <TextBox x:Name="doze"
+                      
+                      Visibility="{Binding isMedicament, Converter={StaticResource BooleanToVisibilityConverter}}"
+    Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="Дозировка"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" Margin="0,322,167,0" Height="45" Grid.ColumnSpan="3" >
+                <TextBox.Text>
+                    <Binding Path="Doze" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+
+            <TextBox x:Name="type"
+                      Visibility="{Binding isInstrument, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    
+    Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="Тип"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" Margin="62,322,0,0" Height="45" Grid.Column="2" >
+                <TextBox.Text>
+                    <Binding Path="Type" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+            <Button Command="{Binding AddItem}"
+                    Visibility="{Binding isAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
+  Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+  ToolTip="Сохранить"
+  IsEnabled="{Binding IsValid}" Margin="2,372,58,28" Height="40" Width="40" Grid.Column="1" RenderTransformOrigin="0.453,0.112">
+                <materialDesign:PackIcon
+    Kind="Check">
+
+                </materialDesign:PackIcon>
+
+            </Button>
+
+            <Button Command="{Binding EditItem}"
+                    Visibility="{Binding isEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
+  Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+  ToolTip="Сохранить изменения"
+  IsEnabled="{Binding IsValid}" Margin="174,372,10,28" Height="40" Width="40" Grid.Column="2">
+                <materialDesign:PackIcon
+    Kind="Check"/>
+
+
+
+            </Button>
+
+
+
+        </Grid>
+
+
+
+
+
+    </Grid>
+</UserControl>

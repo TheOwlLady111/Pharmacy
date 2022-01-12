@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Pharmacy.Views.UserAddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Pharmacy.Views"
+             xmlns:vm="clr-namespace:Pharmacy.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="332"
+    d:DataContext="d:DesignInstance Type=ViewModel:UserOptionsViewModel">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding isEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       FontSize="20"
+                       Foreground="{StaticResource PrimaryHueDarkBrush}"
+                       FontFamily="Times New Roman"
+                       FontWeight="DemiBold"
+                       Text="Редактирование пользователя" Margin="10,10,8,456.6"/>
+        <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding isAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       FontSize="20"
+                       Foreground="{StaticResource PrimaryHueDarkBrush}"
+                       FontFamily="Times New Roman"
+                       FontWeight="DemiBold"
+                       Text="Добавление пользователя" Margin="22,10,23,456.6"/>
+        <TextBox 
+             materialDesign:HintAssist.Hint="Введите имя пользователя"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Margin="0,177,0,276.6" >
+            <TextBox.Text>
+                <Binding Path="Text" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+
+        </TextBox>
+
+
+        <Button
+            Margin="88,256,188,177.6"
+            Command="{Binding Add}"
+            IsEnabled="{Binding Path=IsValid}"
+            Visibility="{Binding isAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
+  Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+  ToolTip="Сохранить пользователя"
+  >
+            <materialDesign:PackIcon
+    Kind="Check" />
+        </Button>
+
+        <Button
+            Margin="178,256,98,177.6"
+            Visibility="{Binding isEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Command="{Binding Edit}"
+            IsEnabled="{Binding Path=IsValid}"
+  Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+  ToolTip="Сохранить изменения"
+  >
+            <materialDesign:PackIcon
+    Kind="Check" />
+        </Button>
+    </Grid>
+</UserControl>
+
