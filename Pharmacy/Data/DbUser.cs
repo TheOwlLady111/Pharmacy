@@ -29,12 +29,14 @@ namespace Pharmacy.Data
             }
         }
 
-        private DbUser(string path)
+        private DbUser(string path) : this()
         {
-         
-            using (FileStream fs = new FileStream(path1, FileMode.OpenOrCreate))
+            if (File.Exists(path1))
             {
-                users = (List<User>)formatter.Deserialize(fs);
+                using (FileStream fs = new FileStream(path1, FileMode.OpenOrCreate))
+                {
+                    users = (List<User>)formatter.Deserialize(fs);
+                }
             }
         }
 

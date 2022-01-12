@@ -24,11 +24,14 @@ namespace Pharmacy.Data
             }
         }
 
-        private Db(string path)
+        private Db(string path) : this()
         {
-            using (FileStream fs = new FileStream(path1, FileMode.OpenOrCreate))
+            if (File.Exists(path1))
             {
-                categories = (List<Category>)formatter.Deserialize(fs);
+                using (FileStream fs = new FileStream(path1, FileMode.OpenOrCreate))
+                {
+                    categories = (List<Category>)formatter.Deserialize(fs);
+                }
             }
         }
 
